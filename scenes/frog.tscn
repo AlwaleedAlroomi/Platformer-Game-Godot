@@ -1,0 +1,126 @@
+[gd_scene load_steps=18 format=3 uid="uid://y23rgmgxoohl"]
+
+[ext_resource type="Texture2D" uid="uid://bd0eoqqm3rd7o" path="res://Sunny-land-files/Graphical Assets/spritesheets/enemy-deadth.png" id="1_3yepa"]
+[ext_resource type="Script" path="res://scripts/frog.gd" id="1_xo1wh"]
+[ext_resource type="Texture2D" uid="uid://gkm4sx0t1o6g" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-1.png" id="2_lsth6"]
+[ext_resource type="Texture2D" uid="uid://dbri1t8r7t7vr" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-2.png" id="3_0q804"]
+[ext_resource type="Texture2D" uid="uid://cs4pe0s8ttywm" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-3.png" id="4_c88oh"]
+[ext_resource type="Texture2D" uid="uid://i6j7daq235vf" path="res://Sunny-land-files/Graphical Assets/sprites/frog/idle/frog-idle-4.png" id="5_eo0od"]
+[ext_resource type="Texture2D" uid="uid://dmttquhj1krw2" path="res://Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-1.png" id="6_msc4y"]
+[ext_resource type="Texture2D" uid="uid://cmlv8s2nab80p" path="res://Sunny-land-files/Graphical Assets/sprites/frog/jump/frog-jump-2.png" id="7_y3sr6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2naup"]
+size = Vector2(17, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45l0t"]
+atlas = ExtResource("1_3yepa")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wotf"]
+atlas = ExtResource("1_3yepa")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vim6"]
+atlas = ExtResource("1_3yepa")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnh11"]
+atlas = ExtResource("1_3yepa")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5urxu"]
+atlas = ExtResource("1_3yepa")
+region = Rect2(160, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lho3x"]
+atlas = ExtResource("1_3yepa")
+region = Rect2(200, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3fhrm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45l0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wotf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vim6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnh11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5urxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lho3x")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lsth6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0q804")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c88oh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eo0od")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lsth6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lsth6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lsth6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lsth6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_msc4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y3sr6")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vrdsr"]
+radius = 121.004
+
+[node name="frog" type="CharacterBody2D"]
+script = ExtResource("1_xo1wh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -7)
+shape = SubResource("RectangleShape2D_2naup")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_3fhrm")
+animation = &"jump"
+
+[node name="playerDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerDetection"]
+shape = SubResource("CircleShape2D_vrdsr")
+
+[connection signal="body_entered" from="playerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="playerDetection" to="." method="_on_player_detection_body_exited"]
