@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgykx28ataogr"]
+[gd_scene load_steps=9 format=3 uid="uid://cgykx28ataogr"]
 
 [ext_resource type="Texture2D" uid="uid://udvbe080up00" path="res://sunny-land/assets/environment/tileset.png" id="1_3epd8"]
 [ext_resource type="PackedScene" uid="uid://dj41efrc5tjlv" path="res://scenes/player.tscn" id="1_i5d7k"]
@@ -400,6 +400,20 @@ texture = ExtResource("1_3epd8")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_06fge")
 
+[sub_resource type="GDScript" id="GDScript_at4ys"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = \"Hp: \" + str(get_node(\"../../Player/Player\").health)
+"
+
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -427,3 +441,29 @@ position = Vector2(479, 181)
 
 [node name="frog" parent="Mobs" instance=ExtResource("5_fxsvj")]
 position = Vector2(239, 288)
+
+[node name="frog2" parent="Mobs" instance=ExtResource("5_fxsvj")]
+position = Vector2(655, 212)
+
+[node name="frog3" parent="Mobs" instance=ExtResource("5_fxsvj")]
+position = Vector2(798, 192)
+
+[node name="frog4" parent="Mobs" instance=ExtResource("5_fxsvj")]
+position = Vector2(318, 133)
+
+[node name="frog5" parent="Mobs" instance=ExtResource("5_fxsvj")]
+position = Vector2(63, 206)
+
+[node name="frog6" parent="Mobs" instance=ExtResource("5_fxsvj")]
+position = Vector2(518, 286)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="hp" type="Label" parent="UI"]
+offset_left = 3.0
+offset_top = 32.0
+offset_right = 85.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+script = SubResource("GDScript_at4ys")
