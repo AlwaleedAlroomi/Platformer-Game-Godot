@@ -1,0 +1,57 @@
+[gd_scene load_steps=11 format=3 uid="uid://donda12at2yc2"]
+
+[ext_resource type="Script" path="res://scripts/cherry.gd" id="1_fr4uk"]
+[ext_resource type="Texture2D" uid="uid://dfyudu5ngche3" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-1.png" id="1_n7avx"]
+[ext_resource type="Texture2D" uid="uid://dgervh2roismd" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-2.png" id="2_n8cwo"]
+[ext_resource type="Texture2D" uid="uid://c4uonatqgsvr" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-3.png" id="3_ttnoy"]
+[ext_resource type="Texture2D" uid="uid://rvavtdvra7hl" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-4.png" id="4_n5cg3"]
+[ext_resource type="Texture2D" uid="uid://bpq1qmqou3qpy" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-5.png" id="5_ewdxs"]
+[ext_resource type="Texture2D" uid="uid://c5xn7pn76gpnv" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-6.png" id="6_j18bj"]
+[ext_resource type="Texture2D" uid="uid://d3xu83hf401n6" path="res://Sunny-land-files/Graphical Assets/sprites/cherry/cherry-7.png" id="7_4um8j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bt706"]
+radius = 7.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m7m7b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_n7avx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_n8cwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ttnoy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n5cg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ewdxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j18bj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4um8j")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="cherry" type="Area2D"]
+script = ExtResource("1_fr4uk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 1)
+shape = SubResource("CircleShape2D_bt706")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m7m7b")
+animation = &"idle"
+autoplay = "idle"
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
